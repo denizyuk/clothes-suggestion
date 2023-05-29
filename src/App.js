@@ -1,25 +1,40 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import AgeInput from './Components/AgeInput';
+import ClothingSuggestions from './Components/ClothingSuggestions';
+import ClothingItem from './Components/ClothingItem';
+import Button from './Components/Button';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [age, setAge] = useState(0);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const handleAgeChange = (newAge) => {
+    setAge(parseInt(newAge, 10));
+  };
+
+  const handleButtonClick = () => {
+    setShowSuggestions(true);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Clothing Recommendation App</h1>
+      <AgeInput age={age} onChange={handleAgeChange} />
+      <Button onClick={handleButtonClick}>Show Clothing Suggestions</Button>
+      {showSuggestions && (
+        <ClothingSuggestions age={age}>
+          {(items) => (
+            <div className="clothing-items">
+              {items.map((item, index) => (
+                <ClothingItem key={index} item={item} />
+              ))}
+            </div>
+          )}
+        </ClothingSuggestions>
+      )}
     </div>
   );
-}
+};
 
 export default App;
