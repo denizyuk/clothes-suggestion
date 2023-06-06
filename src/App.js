@@ -3,6 +3,7 @@ import AgeInput from './Components/AgeInput';
 import ClothingSuggestions from './Components/ClothingSuggestions';
 import ClothingItem from './Components/ClothingItem';
 import Button from './Components/Button';
+import Header from './Components/Header';
 import './App.css';
 
 const App = () => {
@@ -19,7 +20,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Clothing Recommendation App</h1>
+      <Header />
       <AgeInput age={age} onChange={handleAgeChange} />
       <Button onClick={handleButtonClick}>Show Clothing Suggestions</Button>
       {showSuggestions && (
